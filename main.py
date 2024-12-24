@@ -49,7 +49,7 @@ for i in range(questions):
     print(f"Question {q_no}: {question}\n\n{cleaned_options}")
 
 
-input(f"\n\nRetrieving answers for page {page_number}. Press Enter to continue...")
+#input(f"\n\nRetrieving answers for page {page_number}. Press Enter to continue...")
 
 for q_no in questions_dict:
     ans_url = questions_dict[q_no]['ans_link']
@@ -67,18 +67,18 @@ for q_no in questions_dict:
 os.system('clear')
 
 print("\n\n" + "=" * 100 + "\n" + "=" * 100 + "\n")
-if os.path.exist(filename):
-    with open(filename,'r')as file:
-        data=json.load(file)
+if os.path.exists(filename):
+    with open(filename,'r') as file:
+        data=json.loads(file.read())
 else:
     data =[]
 for q_no in questions_dict:
-    collection = {'qst':{questions_dict[q_no]['question']},
+    collection = {'qst':questions_dict[q_no]['question'],
     'opt':questions_dict[q_no]['options'],
     'ans':questions_dict[q_no]['answer']
     }
     data.append(collection)
     print(f"Question {q_no}: {questions_dict[q_no]['question']}\n\n{questions_dict[q_no]['options']}\n\nAnswer: {questions_dict[q_no]['answer']}\n\n" + "=" * 100 + "\n" + "=" * 100 + "\n")
-
+print(data)
 with open(filename,'w') as file:
     json.dump(data,file,indent=4)
